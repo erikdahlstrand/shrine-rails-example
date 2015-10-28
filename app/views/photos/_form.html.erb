@@ -12,9 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :image_data %><br>
-    <%= f.text_area :image_data %>
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
   </div>
+  <%- if @photo.image_data? %>
+    <div class="field">
+      <%= image_tag @photo.image_url(:thumb) %>
+    </div>
+    <div class="field">
+      Remove attachment: <%= f.check_box :remove_image %>
+    </div>
+  <%- end %>
   <div class="actions">
     <%= f.submit %>
   </div>

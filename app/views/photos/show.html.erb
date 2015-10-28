@@ -2,7 +2,7 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @photo.image_data %>
+  <%= image_tag @photo.image_url(:original) %>
 </p>
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |
