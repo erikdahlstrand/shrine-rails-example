@@ -10,7 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
-gem 'shrine'
+gem 'shrine', '~> 1.0'
 
 group :development, :test do
   gem 'byebug'
