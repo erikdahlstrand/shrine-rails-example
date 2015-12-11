@@ -1,9 +1,7 @@
 class ImageUploader < Shrine
   include ImageProcessing::MiniMagick
 
-  plugin :activerecord
   plugin :determine_mime_type
-  plugin :logging, logger: Rails.logger
   plugin :remove_attachment
   plugin :store_dimensions
   plugin :validation_helpers
