@@ -14,6 +14,7 @@ gem 'mini_magick'
 gem 'shrine', '~> 1.0'
 gem 'aws-sdk', '~> 2.1'
 gem 'roda'
+gem 'sidekiq', '~> 4.0.1'
 
 group :development, :test do
   gem 'byebug'
