@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Load the credentials into ENV.
+Dotenv.load! unless Rails.env.production?
+
 module ShrineRailsExample
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

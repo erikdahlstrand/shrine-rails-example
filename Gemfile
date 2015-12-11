@@ -11,9 +11,11 @@ gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine', '~> 1.0'
+gem 'aws-sdk', '~> 2.1'
 
 group :development, :test do
   gem 'byebug'
+  gem 'dotenv'
 end
 
 group :development do
