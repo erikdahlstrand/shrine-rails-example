@@ -2,7 +2,11 @@
 
 <h1>Listing Photos</h1>
 
-<table>
+<%= file_field_tag :file, multiple: true %>
+
+<br><br>
+
+<table id="photos">
   <thead>
     <tr>
       <th>Image</th>
@@ -11,17 +15,6 @@
   </thead>
 
   <tbody>
-    <% @photos.each do |photo| %>
-      <tr>
-        <td><%= image_tag photo.image_url(:thumb) %></td>
-        <td><%= link_to 'Show', photo %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render @photos %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Photo', new_photo_path %>

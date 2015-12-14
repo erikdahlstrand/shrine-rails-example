@@ -1,10 +1,12 @@
 # Shrine Rails example
 
-This is a most basic, scaffolded Rails application using Shrine for file uploads.
+This an Rails app demonstrating how easy it is to implement complex file upload
+workflow using [Shrine]. The app does direct S3 multiple uploads, with storing
+and processing done in background jobs.
 
 ## Requirements
 
-To run the application you need to setup the following things:
+To run the app you need to setup the following things:
 
 * Install ImageMagick:
 
@@ -16,18 +18,30 @@ To run the application you need to setup the following things:
 
   ```rb
   $ bundle install
+  $ gem install foreman
   ```
 
-* Migrate the database
+* Run the migrations
 
-  ```rb
-  $ ./bin/rake db:migrate
+  ```sh
+  $ rake db:migrate
   ```
 
-Once you have all of these things set up, you can run the application:
+* Put your Amazon S3 credentials in `.env`
 
-```rb
-$ ./bin/rails s
+  ```sh
+  S3_ACCESS_KEY_ID="..."
+  S3_SECRET_ACCESS_KEY="..."
+  S3_REGION="..."
+  S3_BUCKET="..."
+  ```
+
+* Install Redis and have it running (for Sidekiq)
+
+Once you have all of these things set up, you can run the app:
+
+```sh
+$ foreman start
 ```
 
 [Shrine]: https://github.com/janko-m/shrine
