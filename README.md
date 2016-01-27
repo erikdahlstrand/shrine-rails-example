@@ -18,10 +18,9 @@ To run the app you need to setup the following things:
 
   ```rb
   $ bundle install
-  $ gem install foreman
   ```
 
-* Run the migrations
+* Have SQLite installed and Run the migrations
 
   ```sh
   $ rake db:migrate
@@ -36,12 +35,10 @@ To run the app you need to setup the following things:
   S3_BUCKET="..."
   ```
 
-* Install Redis and have it running (for Sidekiq)
-
 Once you have all of these things set up, you can run the app:
 
 ```sh
-$ foreman start
+$ rails server
 ```
 
 [Shrine]: https://github.com/janko-m/shrine

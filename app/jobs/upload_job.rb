@@ -1,5 +1,5 @@
 class UploadJob
-  include Sidekiq::Worker
+  include SuckerPunch::Job
 
   def perform(data)
     Shrine::Attacher.promote(data)
