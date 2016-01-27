@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   root to: 'photos#index'
 
-  mount ImageUploader.direct_endpoint, at: "/attachments/images"
+  mount ImageUploader::UploadEndpoint, at: "/attachments/images"
 end
