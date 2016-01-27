@@ -38,6 +38,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (6.0.3)
+    autoprefixer-rails (5.1.11)
+      execjs
+      json
     aws-sdk (2.2.0)
       aws-sdk-resources (= 2.2.0)
     aws-sdk-core (2.2.0)
@@ -46,6 +49,9 @@ GEM
       aws-sdk-core (= 2.2.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.4.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     builder (3.2.2)
     byebug (6.0.2)
     concurrent-ruby (1.0.0)
@@ -148,6 +154,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk (~> 2.1)
+  bootstrap-sass
   byebug
   dotenv
   fastimage

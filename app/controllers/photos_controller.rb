@@ -1,53 +1,31 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_album
 
   def index
-    @photos = Photo.all
-  end
-
-  def show
-  end
-
-  def new
-    @photo = Photo.new
-  end
-
-  def edit
+    @photos = @album.photos
   end
 
   def create
-    @photo = Photo.new(photo_params)
-
-    if @photo.save
-      respond_to do |format|
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.js
-      end
-    else
-      render :new
-    end
+    photo = @album.photos.create(photo_params)
+    render partial: "photo", locals: {photo: photo, idx: @album.photos.count}
   end
 
   def update
-    if @photo.update(photo_params)
-      redirect_to @photo, notice: 'Photo was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @photo.destroy
-    redirect_to photos_url, notice: 'Photo was successfully destroyed.'
+    @album.update(album_params)
+    redirect_to root_path
   end
 
   private
 
-  def set_photo
-    @photo = Photo.find(params[:id])
+  def set_album
+    @album = Album.first_or_create!
+  end
+
+  def album_params
+    params.require(:album).permit!
   end
 
   def photo_params
-    params.require(:photo).permit(:image, :remove_image)
+    params.require(:photo).permit!
   end
 end

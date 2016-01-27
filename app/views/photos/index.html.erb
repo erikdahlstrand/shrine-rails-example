@@ -1,20 +1,15 @@
-<p id="notice"><%= notice %></p>
+<h1>Photos</h1>
 
-<h1>Listing Photos</h1>
+<div class="form-group">
+  <label>Select photos</label>
+  <%= file_field_tag :file, multiple: true %>
+</div>
 
-<%= file_field_tag :file, multiple: true %>
-
-<br><br>
-
-<table id="photos">
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= render @photos %>
-  </tbody>
-</table>
+<%= form_for @album do |f| %>
+  <ul class="list-unstyled">
+    <% @photos.each_with_index do |photo, idx| %>
+      <%= render "photo", photo: photo, idx: idx %>
+    <% end %>
+  </ul>
+  <%= submit_tag "Save", class: "btn btn-primary" %>
+<% end %>
