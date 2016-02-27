@@ -5,8 +5,6 @@
     <%= image_tag photo.image_url(:thumb), width: 300, class: "img-thumbnail" %>
     <%= hidden_field_tag "#{name}[id]", photo.id %>
     <%= hidden_field_tag "#{name}[image_data]", photo.image_data %>
-    <input type="hidden" name="<%= name %>[id]", value=<%= photo.id %>>
-    <input type="hidden" name="<%= name %>[image_data]" value='<%= photo.image_data %>'>
     <span class="pull-right">Remove photo: <%= check_box_tag "#{name}[_destroy]" %></span>
   </div>
 </li>
