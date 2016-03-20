@@ -12,7 +12,7 @@ gem 'bootstrap-sass'
 gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
-gem 'shrine', '~> 1.2'
+gem 'shrine', '~> 1.3'
 gem 'aws-sdk', '~> 2.1'
 gem 'roda'
 gem 'sucker_punch', '~> 2.0'
@@ -26,4 +26,3 @@ group :development do
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end
-
