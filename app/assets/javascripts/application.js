@@ -10,7 +10,8 @@ $(function() {
   $('[type=file]').fileupload({
     add: function(e, data) {
       data.progressBar = $('<div class="progress"><div class="progress-bar"></div></div>').insertAfter(".form-group");
-      $.getJSON('/attachments/images/cache/presign', function(result) {
+      var options = {extension: data.files[0].name.match(/\.\w+$/)[0]}
+      $.getJSON('/attachments/images/cache/presign', options, function(result) {
         data.formData = result['fields'];
         data.url = result['url'];
         data.submit();
