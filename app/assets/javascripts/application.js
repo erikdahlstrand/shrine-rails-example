@@ -9,7 +9,7 @@
 $(function() {
   $('[type=file]').fileupload({
     add: function(e, data) {
-      data.progressBar = $('<div class="progress"><div class="progress-bar"></div></div>').insertAfter(".form-group");
+      data.progressBar = $('<div class="progress" style="width: 300px"><div class="progress-bar"></div></div>').insertAfter(".form-group");
       var options = {extension: data.files[0].name.match(/\.\w+$/)[0]}
       $.getJSON('/attachments/images/cache/presign', options, function(result) {
         data.formData = result['fields'];
@@ -26,7 +26,7 @@ $(function() {
       data.progressBar.remove();
 
       var image = {
-        id: /cache\/(.+)/.exec(data.formData.key)[1], // we have to remove the prefix part
+        id: data.formData.key.match(/cache\/(.+)/)[1], // we have to remove the prefix part
         storage: 'cache',
         metadata: {
           size:      data.files[0].size,
