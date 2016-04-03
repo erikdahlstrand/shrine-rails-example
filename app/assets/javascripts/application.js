@@ -33,7 +33,7 @@ $(function() {
         storage: 'cache',
         metadata: {
           size:      data.files[0].size,
-          filename:  data.files[0].name,
+          filename:  data.files[0].name.match(/[^\/\\]*$/)[1], // IE returns full path
           mime_type: data.files[0].type
         }
       }
