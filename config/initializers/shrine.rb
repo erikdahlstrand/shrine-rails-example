@@ -18,5 +18,5 @@ Shrine.plugin :logging, logger: Rails.logger
 Shrine.plugin :direct_upload, presign: true
 Shrine.plugin :backgrounding
 
-Shrine::Attacher.promote { |data| UploadJob.perform_async(data) }
+Shrine::Attacher.promote { |data| PromoteJob.perform_async(data) }
 Shrine::Attacher.delete { |data| DeleteJob.perform_async(data) }

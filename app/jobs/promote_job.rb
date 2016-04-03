@@ -1,4 +1,4 @@
-class UploadJob
+class PromoteJob
   include SuckerPunch::Job
 
   def perform(data)
