@@ -11,8 +11,8 @@ $(function() {
     add: function(e, data) {
       data.progressBar = $('<div class="progress" style="width: 300px"><div class="progress-bar"></div></div>').insertAfter(".form-group");
       var options = {
-        extension: data.files[0].name.match(/\.\w+$/)[0], // set extension
-        _: Date.now(),                                    // prevent caching
+        extension: data.files[0].name.match(/(\.\w+)?$/)[0], // set extension
+        _: Date.now(),                                       // prevent caching
       }
       $.getJSON('/attachments/images/cache/presign', options, function(result) {
         data.formData = result['fields'];
