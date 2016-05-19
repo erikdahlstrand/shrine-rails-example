@@ -8,14 +8,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-fileupload-rails'
 gem 'bootstrap-sass'
 
-# Shrine dependencies
-gem 'fastimage'
+# Shrine
+gem 'shrine', '~> 2.0'
 gem 'image_processing'
 gem 'mini_magick'
-gem 'shrine', '~> 1.3'
-gem 'aws-sdk', '~> 2.1'
-gem 'roda'
-gem 'sucker_punch', '~> 2.0'
+gem 'fastimage'              # for store_dimensions plugin
+gem 'aws-sdk', '~> 2.1'      # for S3 storage
+gem 'roda'                   # for direct_upload plugin
+gem 'sucker_punch', '~> 2.0' # for backgrounding plugin
 
 group :development, :test do
   gem 'byebug'
