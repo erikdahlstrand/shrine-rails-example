@@ -17,6 +17,7 @@ $(function() {
       $.getJSON('/attachments/images/cache/presign', options, function(result) {
         data.formData = result['fields'];
         data.url = result['url'];
+        data.paramName = 'file';
         data.submit();
       });
     },
