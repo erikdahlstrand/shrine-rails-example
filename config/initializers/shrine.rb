@@ -15,7 +15,7 @@ Shrine.storages = {
 
 Shrine.plugin :activerecord
 Shrine.plugin :logging, logger: Rails.logger
-Shrine.plugin :direct_upload, presign: true
+Shrine.plugin :direct_upload
 Shrine.plugin :backgrounding
 
 Shrine::Attacher.promote { |data| PromoteJob.perform_async(data) }

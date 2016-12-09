@@ -9,7 +9,7 @@ gem 'jquery-fileupload-rails'
 gem 'bootstrap-sass'
 
 # Shrine
-gem 'shrine', '~> 2.0'
+gem 'shrine', '~> 2.2'
 gem 'image_processing'
 gem 'mini_magick'
 gem 'fastimage'              # for store_dimensions plugin
