@@ -17,7 +17,7 @@ class ImageUploader < Shrine
   end
 
   process(:store) do |io|
-    thumb = resize_to_limit!(io.download, 200, 200)
+    thumb = resize_to_limit!(io.download, 300, 300)
     { original: io, thumb: thumb }
   end
 end

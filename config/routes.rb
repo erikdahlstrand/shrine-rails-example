@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   patch "/album" => "photos#update"
   post "/album/photos" => "photos#create"
 
-  mount ImageUploader::UploadEndpoint, at: "/attachments/images"
+  mount Shrine.presign_endpoint(:cache) => "/presign"
 end
