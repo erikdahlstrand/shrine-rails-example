@@ -1,9 +1,0 @@
-<% name = "album[photos_attributes][#{idx}]" %>
-
-<li>
-  <div style="display: inline-block">
-    <%= image_tag photo.image_url(:thumb), width: 300, class: "img-thumbnail" %><br>
-    <%= hidden_field_tag "#{name}[id]", photo.id %>
-    <span class="pull-right">Remove photo: <%= check_box_tag "#{name}[_destroy]" %></span>
-  </div>
-</li>

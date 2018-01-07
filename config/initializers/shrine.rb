@@ -1,25 +1,36 @@
 require "shrine"
-require "shrine/storage/s3"
-require "dotenv"
 
-Dotenv.load!
+if Rails.env.production?
+  require "shrine/storage/s3"
 
-s3_options = {
-  access_key_id:     ENV.fetch("S3_ACCESS_KEY_ID"),
-  secret_access_key: ENV.fetch("S3_SECRET_ACCESS_KEY"),
-  region:            ENV.fetch("S3_REGION"),
-  bucket:            ENV.fetch("S3_BUCKET"),
-}
+  s3_options = {
+    access_key_id:     Rails.application.secrets.s3_access_key_id,
+    secret_access_key: Rails.application.secrets.s3_secret_access_key,
+    region:            Rails.application.secrets.s3_region,
+    bucket:            Rails.application.secrets.s3_bucket,
+  }
 
-Shrine.storages = {
-  cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
-  store: Shrine::Storage::S3.new(prefix: "store", **s3_options),
-}
+  Shrine.storages = {
+    cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
+    store: Shrine::Storage::S3.new(prefix: "store", **s3_options),
+  }
+else
+  require "shrine/storage/file_system"
+
+  Shrine.storages = {
+    cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"),
+    store: Shrine::Storage::FileSystem.new("public", prefix: "uploads/store"),
+  }
+end
 
 Shrine.plugin :activerecord
-Shrine.plugin :logging, logger: Rails.logger
-Shrine.plugin :presign_endpoint
 Shrine.plugin :backgrounding
+Shrine.plugin :logging
+Shrine.plugin :determine_mime_type
+Shrine.plugin :cached_attachment_data
+Shrine.plugin :restore_cached_data
+Shrine.plugin :presign_endpoint if Rails.env.production?
+Shrine.plugin :upload_endpoint if !Rails.env.production?
 
 Shrine::Attacher.promote { |data| PromoteJob.perform_async(data) }
 Shrine::Attacher.delete { |data| DeleteJob.perform_async(data) }

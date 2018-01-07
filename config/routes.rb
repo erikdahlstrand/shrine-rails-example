@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  root to: 'photos#index'
+  root to: 'albums#index'
 
-  patch "/album" => "photos#update"
-  post "/album/photos" => "photos#create"
+  resources :albums
 
-  mount Shrine.presign_endpoint(:cache) => "/presign"
+  if Rails.env.production?
+    mount Shrine.presign_endpoint(:cache) => "/presign"
+  else
+    # In development and test environment we're using filesystem storage
+    # for speed, so on the client side we'll upload files to our app.
+    mount Shrine.upload_endpoint(:cache) => "/upload"
+  end
 end

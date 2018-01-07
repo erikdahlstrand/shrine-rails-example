@@ -1,16 +1,16 @@
-# Shrine Rails example
+# Shrine Rails demo
 
-This is a Rails & ActiveRecord demo of [Shrine]. It demonstrates how easy it is
-to implement complex file upload flow with [Shrine]. It allows the user to add
-or remove photos.
+This is a Rails demo for [Shrine]. It allows the user to create albums and
+attach images. The demo shows an advanced workflow:
 
 Uploading:
 
 1. User selects one or more files
-2. They asynchronously upload directly to S3 (with a progress bar)
-3. Photo records are created with (temporarily stored) images
-4. Background job starts processing and permanently storing images
-5. On finishing it updates the record with original image and its thumbnail
+2. The files get asynchronously uploaded directly to S3 and a progress bar is displayed
+3. The cached file data gets written to the hidden fields
+4. Once the form is submitted, background jobs are kicked off to process the images
+5. The records are saved with cached files, which are shown as fallback
+6. Once background jobs are finished, records are updated with processed attachment data
 
 Deleting:
 
@@ -18,13 +18,23 @@ Deleting:
 2. Deletion starts in background, and form submits instantly
 3. Background job finishes deleting
 
-This is generally the best user experience for file uploads, because everything
-is done asynchronously, the user doesn't have to wait for processing, and
-they're completely unaware of background jobs.
+This asynchronicity generally provides an ideal user experience, because the
+user doesn't have to wait for processing or deleting, and due to fallbacks
+they can be unaware of background jobs.
 
-It is also great peformance-wise, since your app doesn't have to accept file
-uploads (files are uploaded directly to S3), and it isn't blocked by
-processing, storing or deleting.
+Direct uploads and backgrounding also have performance advantages, since your
+app doesn't have to receive file uploads (as files are uploaded directly to S3),
+and the web workers aren't blocked by processing, storing or deleting.
+
+## Implementation
+
+In production environment files are uploaded directly to S3, while in
+development and test environment they are uploaded to the app and stored on
+disk. The demo features both single and multiple uploads.
+
+On the client side [Uppy] is used for handling file uploads. The complete
+JavaScript implementation for the demo can be found in
+[application.js](/app/assets/javascripts/application.js).
 
 ## Requirements
 
@@ -48,13 +58,14 @@ To run the app you need to setup the following things:
   $ rake db:migrate
   ```
 
-* Put your Amazon S3 credentials in `.env`
+* Put your Amazon S3 credentials in `.env` and [setup CORS].
 
   ```sh
+  # .env
+  S3_BUCKET="..."
+  S3_REGION="..."
   S3_ACCESS_KEY_ID="..."
   S3_SECRET_ACCESS_KEY="..."
-  S3_REGION="..."
-  S3_BUCKET="..."
   ```
 
 Once you have all of these things set up, you can run the app:
@@ -64,3 +75,5 @@ $ rails server
 ```
 
 [Shrine]: https://github.com/janko-m/shrine
+[setup CORS]: http://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
+[Uppy]: https://uppy.io

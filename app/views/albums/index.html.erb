@@ -1,0 +1,22 @@
+<h1>Albums</h1>
+
+<div><%= link_to "+ New Album", new_album_path, class: "btn btn-success" %></div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cover</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @albums.each do |album| %>
+      <tr>
+        <td><%= image_tag album.cover_photo_url(:small), size: "100x100", class: "img-thumbnail" %></td>
+        <td><%= album.name %></td>
+        <td><%= link_to "Edit", album, class: "btn btn-default" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
