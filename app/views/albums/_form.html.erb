@@ -20,7 +20,7 @@
     <%= f.file_field :cover_photo, accept: ImageUploader::ALLOWED_TYPES.join(","), data: { upload_server: upload_server, preview_element: "preview-cover-photo", upload_result_element: "album-cover-photo-upload-result" } %>
   </div>
   <div class="image-preview">
-    <%= image_tag @album.cover_photo_url(:small).to_s, width: 300, class: "img-thumbnail file-upload-preview", id: "preview-cover-photo" %>
+    <%= image_tag @album.cover_photo_url(:thumbnail).to_s, width: 300, class: "img-thumbnail file-upload-preview", id: "preview-cover-photo" %>
   </div>
 
   <div class="form-group">

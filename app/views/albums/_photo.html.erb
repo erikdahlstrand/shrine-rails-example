@@ -1,7 +1,7 @@
 <li>
   <div class="media">
     <div class="media-left">
-      <%= image_tag photo.image_url(:small).to_s, size: 150, class: "img-thumbnail file-upload-preview media-object", id: "album-photo-preview-#{idx}" %>
+      <%= image_tag photo.image_url(:thumbnail).to_s, size: 150, class: "img-thumbnail file-upload-preview media-object", id: "album-photo-preview-#{idx}" %>
     </div>
     <div class="media-body">
       <div class="form-group">

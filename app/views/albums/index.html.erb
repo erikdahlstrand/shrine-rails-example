@@ -13,7 +13,7 @@
   <tbody>
     <% @albums.each do |album| %>
       <tr>
-        <td><%= image_tag album.cover_photo_url(:small), size: "100x100", class: "img-thumbnail" %></td>
+        <td><%= image_tag album.cover_photo_url(:thumbnail), size: "100x100", class: "img-thumbnail" %></td>
         <td><%= album.name %></td>
         <td><%= link_to "Edit", album, class: "btn btn-default" %></td>
       </tr>
