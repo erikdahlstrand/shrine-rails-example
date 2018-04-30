@@ -11,7 +11,7 @@ gem 'sucker_punch', '~> 2.0'
 gem 'dotenv-rails'
 
 # Shrine
-gem 'shrine', '~> 2.10'
+gem 'shrine', '~> 2.11'
 gem 'aws-sdk-s3', '~> 1.2'
 gem 'image_processing', '~> 1.0'
 

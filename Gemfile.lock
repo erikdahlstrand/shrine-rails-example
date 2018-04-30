@@ -67,7 +67,7 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
-    down (4.1.0)
+    down (4.4.0)
     erubi (1.7.0)
     execjs (2.6.0)
     ffi (1.9.18)
@@ -142,7 +142,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    shrine (2.7.0)
+    shrine (2.11.0)
       down (~> 4.1)
     spring (1.4.0)
     sprockets (3.7.1)
@@ -185,7 +185,7 @@ DEPENDENCIES
   puma
   rails (~> 5.1)
   sass-rails (~> 5.0)
-  shrine (~> 2.7)
+  shrine (~> 2.11)
   spring
   sqlite3
   sucker_punch (~> 2.0)
