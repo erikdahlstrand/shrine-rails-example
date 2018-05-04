@@ -39,7 +39,6 @@ function fileUpload(fileInput) {
     uppy.use(Uppy.XHRUpload, {
       endpoint: '/upload', // Shrine's upload endpoint
       fieldName: 'file',
-      headers: { 'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content }
     })
   }
 
