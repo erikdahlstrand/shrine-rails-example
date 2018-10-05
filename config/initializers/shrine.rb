@@ -39,7 +39,6 @@ if Rails.env.production?
       content_disposition:    "inline; filename=\"#{filename}\"", # set download filename
       content_type:           type,                               # set content type (defaults to "application/octet-stream")
       content_length_range:   0..(10*1024*1024),                  # limit upload size to 10 MB
-      success_action_status: '201',                               # return object key in upload response
     }
   }
 else
