@@ -14,6 +14,7 @@ function fileUpload(fileInput) {
       autoProceed: true,
       restrictions: {
         allowedFileTypes: fileInput.accept.split(','),
+        maxNumberOfFiles: (fileInput.multiple ? undefined : 1),
       }
     })
     .use(Uppy.FileInput, {
