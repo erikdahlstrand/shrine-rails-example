@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'albums#index'
+  root to: "albums#index"
 
   resources :albums
 
@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     # for speed, so on the client side we'll upload files to our app.
     mount Shrine.upload_endpoint(:cache) => "/upload"
   end
+
+  mount DynamicImageUploader.derivation_endpoint => "/derivations/image"
 end

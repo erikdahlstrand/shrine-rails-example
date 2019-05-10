@@ -1,3 +1,3 @@
 class Photo < ActiveRecord::Base
-  include ImageUploader::Attachment.new(:image)
+  include DynamicImageUploader::Attachment.new(:image)  # ImageUploader will attach and manage `image`
 end
