@@ -11,9 +11,10 @@ gem 'sucker_punch', '~> 2.0'
 gem 'dotenv-rails'
 
 # Shrine
-gem 'shrine', '~> 2.18.0'
-gem 'aws-sdk-s3', '~> 1.2'
+gem 'shrine', '~> 2.19.0'
+gem 'aws-sdk-s3', '~> 1.14'
 gem 'image_processing', '~> 1.0'
+gem 'marcel'
 
 group :development, :test do
   gem 'byebug'

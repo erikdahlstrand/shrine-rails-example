@@ -48,19 +48,22 @@ GEM
     autoprefixer-rails (5.1.11)
       execjs
       json
-    aws-partitions (1.20.0)
-    aws-sdk-core (3.3.0)
+    aws-eventstream (1.0.3)
+    aws-partitions (1.196.0)
+    aws-sdk-core (3.62.0)
+      aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
-      aws-sigv4 (~> 1.0)
+      aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.1.0)
-      aws-sdk-core (~> 3)
-      aws-sigv4 (~> 1.0)
-    aws-sdk-s3 (1.2.0)
-      aws-sdk-core (~> 3)
+    aws-sdk-kms (1.24.0)
+      aws-sdk-core (~> 3, >= 3.61.1)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.46.0)
+      aws-sdk-core (~> 3, >= 3.61.1)
       aws-sdk-kms (~> 1)
-      aws-sigv4 (~> 1.0)
-    aws-sigv4 (1.0.2)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.1.0)
+      aws-eventstream (~> 1.0, >= 1.0.2)
     bindex (0.5.0)
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
@@ -86,7 +89,7 @@ GEM
     image_processing (1.2.0)
       mini_magick (~> 4.0)
       ruby-vips (>= 2.0.10, < 3)
-    jmespath (1.3.1)
+    jmespath (1.4.0)
     json (2.1.0)
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
@@ -107,7 +110,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-    public_suffix (3.1.0)
+    public_suffix (3.1.1)
     puma (3.11.0)
     rack (2.0.5)
     rack-test (1.0.0)
@@ -153,7 +156,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    shrine (2.18.0)
+    shrine (2.19.2)
       content_disposition (~> 1.0)
       down (~> 4.1)
     spring (1.4.0)
@@ -188,16 +191,17 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk-s3 (~> 1.2)
+  aws-sdk-s3 (~> 1.14)
   bootstrap-sass
   byebug
   dotenv-rails
   image_processing (~> 1.0)
   listen
+  marcel
   puma
   rails (~> 5.2)
   sass-rails (~> 5.0)
-  shrine (~> 2.18.0)
+  shrine (~> 2.19.0)
   spring
   sqlite3
   sucker_punch (~> 2.0)
