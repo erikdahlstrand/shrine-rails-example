@@ -1,9 +1,5 @@
 module ApplicationHelper
   def upload_server
-    if Rails.env.production?
-      :s3
-    else
-      :app
-    end
+    Rails.configuration.upload_server
   end
 end

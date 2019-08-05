@@ -13,6 +13,15 @@ module ShrineRailsExample
 
     config.active_record.sqlite3.represent_boolean_as_integer = true
 
+    # supports :s3, :s3_multipart, or :app
+    config.upload_server = if ENV["UPLOAD_SERVER"].present?
+      ENV["UPLOAD_SERVER"].to_sym
+    elsif Rails.env.production?
+      :s3
+    else
+      :app
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

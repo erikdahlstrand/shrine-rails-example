@@ -1,7 +1,7 @@
 require "shrine"
 
-# use S3 for production and local file for other environments
-if Rails.env.production?
+# By default use S3 for production and local file for other environments
+if Rails.configuration.upload_server == :s3
   require "shrine/storage/s3"
 
   s3_options = {
@@ -16,7 +16,7 @@ if Rails.env.production?
     cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
     store: Shrine::Storage::S3.new(**s3_options),
   }
-else
+else # :app
   require "shrine/storage/file_system"
 
   # both `cache` and `store` storages are needed
@@ -32,7 +32,7 @@ Shrine.plugin :determine_mime_type, analyzer: :marcel
 Shrine.plugin :cached_attachment_data
 Shrine.plugin :restore_cached_data
 
-if Rails.env.production?
+if Rails.configuration.upload_server == :s3
   Shrine.plugin :presign_endpoint, presign_options: -> (request) {
     # Uppy will send the "filename" and "type" query parameters
     filename = request.params["filename"]
@@ -44,7 +44,7 @@ if Rails.env.production?
       content_length_range:   0..(10*1024*1024),                   # limit upload size to 10 MB
     }
   }
-else
+else # :app
   Shrine.plugin :upload_endpoint
 end
 
