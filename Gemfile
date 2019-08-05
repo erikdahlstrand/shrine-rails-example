@@ -12,6 +12,7 @@ gem 'dotenv-rails'
 
 # Shrine
 gem 'shrine', '~> 2.19.0'
+gem "uppy-s3_multipart", ">= 0.3.2"
 gem 'aws-sdk-s3', '~> 1.14'
 gem 'image_processing', '~> 1.0'
 gem 'marcel'
