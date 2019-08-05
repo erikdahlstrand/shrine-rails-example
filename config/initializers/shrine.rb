@@ -1,7 +1,7 @@
 require "shrine"
 
 # By default use S3 for production and local file for other environments
-if Rails.configuration.upload_server == :s3
+if [:s3, :s3_multipart].include?(Rails.configuration.upload_server)
   require "shrine/storage/s3"
 
   s3_options = {
@@ -42,6 +42,19 @@ if Rails.configuration.upload_server == :s3
       content_disposition:    ContentDisposition.inline(filename), # set download filename
       content_type:           type,                                # set content type
       content_length_range:   0..(10*1024*1024),                   # limit upload size to 10 MB
+    }
+  }
+elsif Rails.configuration.upload_server == :s3_multipart
+  Shrine.plugin :uppy_s3_multipart, options: {
+    create_multipart_upload: -> (request) {
+      # Uppy will send the "filename" and "type" query parameters
+      filename = request.params["filename"]
+      type     = request.params["type"]
+
+      {
+        content_disposition:    ContentDisposition.inline(filename), # set download filename
+        content_type:           type                                 # set content type
+      }
     }
   }
 else # :app
