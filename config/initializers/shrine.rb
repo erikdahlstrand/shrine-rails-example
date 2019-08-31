@@ -45,18 +45,7 @@ if Rails.configuration.upload_server == :s3
     }
   }
 elsif Rails.configuration.upload_server == :s3_multipart
-  Shrine.plugin :uppy_s3_multipart, options: {
-    create_multipart_upload: -> (request) {
-      # Uppy will send the "filename" and "type" query parameters
-      filename = request.params["filename"]
-      type     = request.params["type"]
-
-      {
-        content_disposition:    ContentDisposition.inline(filename), # set download filename
-        content_type:           type                                 # set content type
-      }
-    }
-  }
+  Shrine.plugin :uppy_s3_multipart
 else # :app
   Shrine.plugin :upload_endpoint
 end
