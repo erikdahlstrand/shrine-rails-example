@@ -8,7 +8,7 @@ class ImageUploader < Shrine
   plugin :remove_attachment
   plugin :pretty_location
   plugin :validation_helpers
-  plugin :store_dimensions, analyzer: :mini_magick
+  plugin :store_dimensions
 
   # File validations (requires `validation_helpers` plugin)
   Attacher.validate do

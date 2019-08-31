@@ -16,6 +16,7 @@ gem "uppy-s3_multipart", ">= 0.3.2"
 gem 'aws-sdk-s3', '~> 1.14'
 gem 'image_processing', '~> 1.0'
 gem 'marcel'
+gem 'fastimage'
 
 group :development, :test do
   gem 'byebug'

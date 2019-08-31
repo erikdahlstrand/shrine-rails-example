@@ -81,6 +81,7 @@ GEM
       addressable (~> 2.5)
     erubi (1.7.1)
     execjs (2.6.0)
+    fastimage (2.1.5)
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -201,6 +202,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   dotenv-rails
+  fastimage
   image_processing (~> 1.0)
   listen
   marcel
