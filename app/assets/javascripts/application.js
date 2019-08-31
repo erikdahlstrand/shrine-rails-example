@@ -78,7 +78,7 @@ function fileUpload(fileInput) {
     })
   } else if (fileInput.dataset.uploadServer == 's3_multipart') {
     uppy.use(Uppy.AwsS3Multipart, {
-      companionUrl: "/" // will call uppy-s3_multipart endpoint mounted on `/s3/params`
+      companionUrl: '/' // will call uppy-s3_multipart endpoint mounted on `/s3/multipart`
     })
   } else {
     uppy.use(Uppy.XHRUpload, {
@@ -90,32 +90,29 @@ function fileUpload(fileInput) {
 }
 
 function uploadedFileData(file, response, fileInput) {
-  if (fileInput.dataset.uploadServer == 's3' ||
-      fileInput.dataset.uploadServer == 's3_multipart' ) {
+  if (fileInput.dataset.uploadServer == 's3') {
+    var id = file.meta['key'].match(/^cache\/(.+)/)[1]; // object key without prefix
 
-    // construct uploaded file data in the format that Shrine expects
+    return JSON.stringify(fileData(file, id))
+  } else if (fileInput.dataset.uploadServer == 's3_multipart') {
+    var id = response.uploadURL.match(/\/cache\/([^\?]+)/)[1]; // object key without prefix
 
-    var id;
-    if (fileInput.dataset.uploadServer == 's3') {
-      id = file.meta['key'].match(/^cache\/(.+)/)[1]; // object key without prefix
-    } else {
-      // s3_multipart
-      // object key without prefix:
-      id = (new URL(response.uploadURL)).pathname.match(/^\/cache\/([^\?]+)/)[1];
-    }
-
-
-    return JSON.stringify({
-      id: id,
-      storage: 'cache',
-      metadata: {
-        size:      file.size,
-        filename:  file.name,
-        mime_type: file.type,
-      }
-    })
+    return JSON.stringify(fileData(file, id))
   } else {
     return JSON.stringify(response.body)
+  }
+}
+
+// constructs uploaded file data in the format that Shrine expects
+function fileData(file, id) {
+  return {
+    id: id,
+    storage: 'cache',
+    metadata: {
+      size:      file.size,
+      filename:  file.name,
+      mime_type: file.type,
+    }
   }
 }
 
