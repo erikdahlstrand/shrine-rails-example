@@ -1,17 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2'
+# Core
+gem 'rails', '~> 6.0'
 gem 'puma'
-
-gem 'sass-rails', '~> 5.0'
-gem 'sqlite3'
-gem 'uglifier', '>= 1.3.0'
-gem 'bootstrap-sass'
 gem 'sucker_punch', '~> 2.0'
-gem 'dotenv-rails'
+gem 'sqlite3'
+gem 'webpacker', '~> 4.0'
 
 # Shrine
-gem 'shrine', '~> 2.19.0'
+gem 'shrine', '>= 3.0.0.beta3'
 gem "uppy-s3_multipart", ">= 0.3.2"
 gem 'aws-sdk-s3', '~> 1.14'
 gem 'image_processing', '~> 1.0'
@@ -23,7 +20,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'spring'
-  gem 'listen'
   gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end

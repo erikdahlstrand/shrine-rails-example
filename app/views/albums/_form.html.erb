@@ -1,12 +1,10 @@
 <%= form_for @album do |f| %>
   <% if @album.errors.any? %>
-    <div class="validation-errors alert alert-danger">
-      <ul class="list-unstyled">
-        <% @album.errors.full_messages.each do |message| %>
-          <li>Album <%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul class="list-unstyled alert alert-danger">
+      <% @album.errors.full_messages.each do |message| %>
+        <li>Album <%= message %></li>
+      <% end %>
+    </ul>
   <% end %>
 
   <div class="form-group">
@@ -33,7 +31,7 @@
   </div>
   <div class="image-preview">
     <!-- static link to the thumbnail generated on attachment -->
-    <%= image_tag @album.cover_photo_url(:thumbnail).to_s,
+    <%= image_tag @album.cover_photo_url(:medium).to_s,
       width: 300,
       class: "img-thumbnail file-upload-preview",
       id: "preview-cover-photo" %>

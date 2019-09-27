@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Shrine Rails demo featuring multiple file uploads to S3 with Uppy" />
 
-    <script src="https://unpkg.com/babel-polyfill@6.26.0/dist/polyfill.min.js"></script>
-    <script src="https://unpkg.com/whatwg-fetch@2.0.3/fetch.js"></script>
-    <script src="https://transloadit.edgly.net/releases/uppy/v1.3.0/uppy.min.js"></script>
-
-    <link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" media="screen" rel="stylesheet" />
-    <link href="https://transloadit.edgly.net/releases/uppy/v1.3.0/uppy.min.css" rel="stylesheet" />
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag "application" %>
+    <%= stylesheet_pack_tag "application" %>
 
     <%= csrf_meta_tags %>
   </head>
@@ -20,7 +15,5 @@
     <div class="container">
       <%= yield %>
     </div>
-
-    <%= javascript_include_tag 'application' %>
   </body>
 </html>

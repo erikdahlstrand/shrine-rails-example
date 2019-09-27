@@ -1,14 +1,15 @@
 require "shrine"
 
 # By default use S3 for production and local file for other environments
-if [:s3, :s3_multipart].include?(Rails.configuration.upload_server)
+case Rails.configuration.upload_server
+when :s3, :s3_multipart
   require "shrine/storage/s3"
 
   s3_options = {
-    access_key_id:     Rails.application.secrets.s3_access_key_id,
-    secret_access_key: Rails.application.secrets.s3_secret_access_key,
-    region:            Rails.application.secrets.s3_region,
-    bucket:            Rails.application.secrets.s3_bucket,
+    access_key_id:     Rails.application.credentials.s3.access_key_id,
+    secret_access_key: Rails.application.credentials.s3.secret_access_key,
+    region:            Rails.application.credentials.s3.region,
+    bucket:            Rails.application.credentials.s3.bucket,
   }
 
   # both `cache` and `store` storages are needed
@@ -16,7 +17,7 @@ if [:s3, :s3_multipart].include?(Rails.configuration.upload_server)
     cache: Shrine::Storage::S3.new(prefix: "cache", **s3_options),
     store: Shrine::Storage::S3.new(**s3_options),
   }
-else # :app
+when :app
   require "shrine/storage/file_system"
 
   # both `cache` and `store` storages are needed
@@ -28,11 +29,15 @@ end
 
 Shrine.plugin :activerecord
 Shrine.plugin :instrumentation
-Shrine.plugin :determine_mime_type, analyzer: :marcel
+Shrine.plugin :determine_mime_type, analyzer: :marcel, log_subscriber: nil
 Shrine.plugin :cached_attachment_data
 Shrine.plugin :restore_cached_data
+Shrine.plugin :derivatives          # up front processing
+Shrine.plugin :derivation_endpoint, # on-the-fly processing
+  secret_key: Rails.application.credentials.secret_key_base
 
-if Rails.configuration.upload_server == :s3
+case Rails.configuration.upload_server
+when :s3
   Shrine.plugin :presign_endpoint, presign_options: -> (request) {
     # Uppy will send the "filename" and "type" query parameters
     filename = request.params["filename"]
@@ -44,17 +49,17 @@ if Rails.configuration.upload_server == :s3
       content_length_range:   0..(10*1024*1024),                   # limit upload size to 10 MB
     }
   }
-elsif Rails.configuration.upload_server == :s3_multipart
+when :s3_multipart
   Shrine.plugin :uppy_s3_multipart
-else # :app
+when :app
   Shrine.plugin :upload_endpoint
 end
 
-Shrine.plugin :derivation_endpoint,
-  secret_key: "secret",
-  download_errors: [defined?(Shrine::Storage::S3) ? Aws::S3::Errors::NotFound : Errno::ENOENT]
-
 # delay promoting and deleting files to a background job (`backgrounding` plugin)
 Shrine.plugin :backgrounding
-Shrine::Attacher.promote { |data| PromoteJob.perform_async(data) }
-Shrine::Attacher.delete { |data| DeleteJob.perform_async(data) }
+Shrine::Attacher.promote_block do
+  PromoteJob.perform_later(self.class.name, record, name, file_data)
+end
+Shrine::Attacher.destroy_block do
+  DestroyJob.perform_later(self.class.name, data)
+end
