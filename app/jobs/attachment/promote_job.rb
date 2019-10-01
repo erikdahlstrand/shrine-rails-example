@@ -1,4 +1,4 @@
-class PromoteJob < ApplicationJob
+class Attachment::PromoteJob < ApplicationJob
   def perform(attacher_class, record, name, file_data)
     attacher_class = Object.const_get(attacher_class)
 
