@@ -8,7 +8,7 @@ gem 'sqlite3'
 gem 'webpacker', '~> 4.0'
 
 # Shrine
-gem 'shrine', '>= 3.0.0.beta3'
+gem 'shrine', '~> 3.0'
 gem "uppy-s3_multipart", ">= 0.3.2"
 gem 'aws-sdk-s3', '~> 1.14'
 gem 'image_processing', '~> 1.0'

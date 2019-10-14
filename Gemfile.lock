@@ -80,7 +80,7 @@ GEM
     concurrent-ruby (1.0.5)
     content_disposition (1.0.0)
     crass (1.0.4)
-    down (4.8.1)
+    down (5.0.0)
       addressable (~> 2.5)
     erubi (1.9.0)
     fastimage (2.1.5)
@@ -155,9 +155,9 @@ GEM
     ruby-vips (2.0.11)
       ffi (~> 1.9)
     ruby_dep (1.5.0)
-    shrine (3.0.0.beta3)
+    shrine (3.0.0)
       content_disposition (~> 1.0)
-      down (~> 4.1)
+      down (~> 5.0)
     spring (1.4.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -206,7 +206,7 @@ DEPENDENCIES
   marcel
   puma
   rails (~> 6.0)
-  shrine (>= 3.0.0.beta3)
+  shrine (~> 3.0)
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
