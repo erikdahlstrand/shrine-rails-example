@@ -28,9 +28,9 @@ class ImageUploader < Shrine
   end
 
   # Thumbnails processor (requires `derivatives` plugin)
-  Attacher.derivatives_processor do |original|
-    THUMBNAILS.inject({}) do |result, (name, (width, height))|
-      result.merge! name => THUMBNAILER.call(original, width, height)
+  Attacher.derivatives do |original|
+    THUMBNAILS.transform_values do |(width, height)|
+      GenerateThumbnail.call(original, width, height) # lib/generate_thumbnail.rb
     end
   end
 
@@ -41,12 +41,6 @@ class ImageUploader < Shrine
 
   # Dynamic thumbnail definition (requires `derivation_endpoint` plugin)
   derivation :thumbnail do |file, width, height|
-    THUMBNAILER.call(file, width.to_i, height.to_i)
-  end
-
-  THUMBNAILER = -> (file, width, height) do
-    ImageProcessing::MiniMagick
-      .source(file)
-      .resize_to_limit!(width, height)
+    GenerateThumbnail.call(file, width.to_i, height.to_i) # lib/generate_thumbnail.rb
   end
 end

@@ -1,12 +1,16 @@
 {
+  "name": "shrine_rails_example",
+  "private": true,
   "dependencies": {
-    "@rails/webpacker": "^4.0.7",
-    "bootstrap": "^4.3.1",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.2.2",
+    "bootstrap": "^4.4.1",
     "randomstring": "^1.1.5",
-    "uppy": "^1.4.0"
+    "turbolinks": "^5.2.0",
+    "uppy": "^1.8.0"
   },
+  "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3.8.1"
-  },
-  "license": "MIT"
+    "webpack-dev-server": "^3.10.1"
+  }
 }

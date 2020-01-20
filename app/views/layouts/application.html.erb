@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Shrine Rails Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Shrine Rails demo featuring multiple file uploads to S3 with Uppy" />
-
-    <%= javascript_pack_tag "application" %>
-    <%= stylesheet_pack_tag "application" %>
-
+    <title>ShrineRailsExample</title>
     <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>

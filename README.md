@@ -121,7 +121,9 @@ development.
 So if you would like to use the app with the S3 multipart upload server
 strategy, launch the rails app with:
 
-    UPLOAD_SERVER=s3_multipart rails server
+```sh
+$ UPLOAD_SERVER=s3_multipart rails server
+```
 
 ## Consider access control
 
@@ -130,11 +132,11 @@ directly to your cache storage, you will want to limit access to the signing
 and/or file-receiving endpoints in routes.rb. For example, if using devise one
 way to do this is:
 
-  ```rb
-  authenticate :user do
-    mount Shrine.upload_endpoint(:cache) => "/upload"
-  end
-  ```
+```rb
+authenticate :user do
+  mount Shrine.upload_endpoint(:cache) => "/upload"
+end
+```
 
 ## References
 

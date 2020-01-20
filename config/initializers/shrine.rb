@@ -34,7 +34,7 @@ Shrine.plugin :cached_attachment_data
 Shrine.plugin :restore_cached_data
 Shrine.plugin :derivatives          # up front processing
 Shrine.plugin :derivation_endpoint, # on-the-fly processing
-  secret_key: Rails.application.credentials.secret_key_base
+  secret_key: Rails.application.secret_key_base
 
 case Rails.configuration.upload_server
 when :s3
@@ -57,9 +57,5 @@ end
 
 # delay promoting and deleting files to a background job (`backgrounding` plugin)
 Shrine.plugin :backgrounding
-Shrine::Attacher.promote_block do
-  Attachment::PromoteJob.perform_later(self.class.name, record, name, file_data)
-end
-Shrine::Attacher.destroy_block do
-  Attachment::DestroyJob.perform_later(self.class.name, data)
-end
+Shrine::Attacher.promote_block { Attachment::PromoteJob.perform_later(record, name, file_data) }
+Shrine::Attacher.destroy_block { Attachment::DestroyJob.perform_later(data) }
