@@ -5,12 +5,7 @@ case Rails.configuration.upload_server
 when :s3, :s3_multipart
   require "shrine/storage/s3"
 
-  s3_options = {
-    access_key_id:     Rails.application.credentials.s3.access_key_id,
-    secret_access_key: Rails.application.credentials.s3.secret_access_key,
-    region:            Rails.application.credentials.s3.region,
-    bucket:            Rails.application.credentials.s3.bucket,
-  }
+  s3_options = Rails.application.credentials.s3
 
   # both `cache` and `store` storages are needed
   Shrine.storages = {
