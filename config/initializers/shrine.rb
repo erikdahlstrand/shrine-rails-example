@@ -52,5 +52,5 @@ end
 
 # delay promoting and deleting files to a background job (`backgrounding` plugin)
 Shrine.plugin :backgrounding
-Shrine::Attacher.promote_block { Attachment::PromoteJob.perform_later(record, name, file_data) }
+Shrine::Attacher.promote_block { Attachment::PromoteJob.perform_later(record, name.to_s, file_data) }
 Shrine::Attacher.destroy_block { Attachment::DestroyJob.perform_later(data) }
