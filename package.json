@@ -2,9 +2,10 @@
   "name": "shrine_rails_example",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.10.1",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^5.1.1",
     "randomstring": "^1.1.5",
     "uppy": "^1.8.0",
     "webpack": "^4.46.0",

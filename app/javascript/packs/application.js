@@ -1,6 +1,6 @@
 require("@rails/ujs").start()
 
-import 'bootstrap/dist/css/bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import { singleFileUpload, multipleFileUpload } from 'fileUpload'
 

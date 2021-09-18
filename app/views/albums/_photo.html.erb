@@ -1,17 +1,17 @@
-<li>
-  <div class="media">
-    <%= image_tag photo.image.derivation_url(:thumbnail, 300, 300).to_s,
-      width: 150,
-      class: "img-thumbnail mr-3" %>
+<li class="mb-3">
+  <div class="d-flex">
+    <div class="flex-shrink-0">
+      <%= image_tag photo.image.derivation_url(:thumbnail, 300, 300).to_s, width: 150, class: "img-thumbnail" %>
+    </div>
 
-    <div class="media-body">
-      <div class="form-group">
-        <%= f.label :title %>
+    <div class="flex-grow-1 ms-3">
+      <div class="mb-3">
+        <%= f.label :title, class: "form-label" %>
         <%= f.text_field :title, class: "form-control" %>
       </div>
-      <div class="form-group">
-        <%= f.label :_destroy, "Remove Photo" %>
-        <%= f.check_box :_destroy %>
+      <div class="mb-3 form-check">
+        <%= f.label :_destroy, "Remove Photo", class: "form-check-label" %>
+        <%= f.check_box :_destroy, class: "form-check-input" %>
       </div>
     </div>
   </div>

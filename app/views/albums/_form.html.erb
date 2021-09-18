@@ -7,17 +7,18 @@
     </ul>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="mb-3">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :cover_photo %>
+  <div class="mb-3">
+    <%= f.label :cover_photo, class: "form-label" %>
 
     <!-- will be replaced by Uppy -->
     <%= f.file_field :cover_photo,
       accept: ImageUploader::ALLOWED_TYPES.join(","),
+      class: "form-control",
       data: {
         upload_server: upload_server,
         preview_element: "preview-cover-photo",
@@ -29,7 +30,8 @@
       value: @album.cached_cover_photo_data,
       id: "album-cover-photo-upload-result" %>
   </div>
-  <div class="image-preview">
+
+  <div class="d-inline-block mt-1 mb-3">
     <!-- static link to the thumbnail generated on attachment -->
     <%= image_tag @album.cover_photo_url(:medium).to_s,
       width: 300,
@@ -38,11 +40,12 @@
   </div>
 
   <% if @album.persisted? %>
-    <div class="form-group">
+    <div class="mb-3">
       <!-- will be replaced by Uppy -->
-      <%= f.label :photos, "Select photos" %>
+      <%= f.label :photos, "Select photos", class: "form-label" %>
       <%= f.file_field :photos,
         multiple: true,
+        class: "form-control",
         accept: ImageUploader::ALLOWED_TYPES.join(","),
         data: {
           upload_server: upload_server,
@@ -57,7 +60,7 @@
   </ul>
 
   <%= f.submit "Save", class: "btn btn-primary" %>
-  <%= link_to albums_path, class: "btn btn-default" do %>
+  <%= link_to albums_path, class: "btn btn-light" do %>
     &larr; Back to albums
   <% end %>
 <% end %>
