@@ -75,7 +75,7 @@ const multipleFileUpload = (fileInput) => {
 }
 
 const fileUpload = (fileInput) => {
-  const uppy = Core({
+  const uppy = new Core({
     id: fileInput.id,
     autoProceed: true,
     restrictions: {

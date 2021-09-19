@@ -11,7 +11,7 @@
     "mini-css-extract-plugin": "^2.3.0",
     "nanoid": "^3.1.25",
     "style-loader": "^3.2.1",
-    "uppy": "^1.8.0",
+    "uppy": "^2.1.0",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },
