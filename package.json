@@ -7,7 +7,7 @@
     "@rails/webpacker": "5.4.3",
     "bootstrap": "^5.1.1",
     "randomstring": "^1.1.5",
-    "uppy": "^1.8.0",
+    "uppy": "^2.1.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
