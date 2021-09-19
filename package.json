@@ -4,15 +4,20 @@
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.4.3",
+    "@rails/webpacker": "^6.0.0-rc.5",
     "bootstrap": "^5.1.1",
+    "css-loader": "^6.3.0",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "mini-css-extract-plugin": "^2.3.0",
     "randomstring": "^1.1.5",
+    "style-loader": "^3.2.1",
     "uppy": "^1.8.0",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3"
+    "@webpack-cli/serve": "^1.5.2",
+    "webpack-dev-server": "^4.2.1"
   }
 }

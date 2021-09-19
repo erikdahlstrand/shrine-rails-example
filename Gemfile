@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 6.1.4'
 gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 5.4'
-gem 'webpacker', '~> 5.4'
+gem 'webpacker', '6.0.0.rc.5'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
