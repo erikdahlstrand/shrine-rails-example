@@ -12,44 +12,38 @@
     <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= f.label :cover_photo, class: "form-label" %>
+  <div data-controller="single-upload" data-single-upload-types-value="<%= ImageUploader::ALLOWED_TYPES.to_json %>" data-single-upload-server-value="<%= upload_server %>">
+    <div class="mb-3">
+      <%= f.label :cover_photo, class: "form-label" %>
 
-    <!-- will be replaced by Uppy -->
-    <%= f.file_field :cover_photo,
-      accept: ImageUploader::ALLOWED_TYPES.join(","),
-      class: "form-control",
-      data: {
-        upload_server: upload_server,
-        preview_element: "preview-cover-photo",
-        upload_result_element: "album-cover-photo-upload-result",
-      } %>
+      <!-- will be replaced by Uppy -->
+      <%= f.file_field :cover_photo,
+        class: "form-control",
+        data: { single_upload_target: "input" } %>
 
-    <!-- for storing cover photo uploaded file data -->
-    <%= f.hidden_field :cover_photo,
-      value: @album.cached_cover_photo_data,
-      id: "album-cover-photo-upload-result" %>
-  </div>
+      <!-- for storing cover photo uploaded file data -->
+      <%= f.hidden_field :cover_photo,
+        value: @album.cached_cover_photo_data,
+        data: { single_upload_target: "result" } %>
+    </div>
 
-  <div class="d-inline-block mt-1 mb-3">
-    <!-- static link to the thumbnail generated on attachment -->
-    <%= image_tag @album.cover_photo_url(:medium).to_s,
-      width: 300,
-      class: "img-thumbnail file-upload-preview",
-      id: "preview-cover-photo" %>
+    <div class="d-inline-block mt-1 mb-3">
+      <!-- static link to the thumbnail generated on attachment -->
+      <%= image_tag @album.cover_photo_url(:medium).to_s,
+        width: 300,
+        class: "img-thumbnail file-upload-preview",
+        data: { single_upload_target: "preview" } %>
+    </div>
   </div>
 
   <% if @album.persisted? %>
-    <div class="mb-3">
+    <div class="mb-3" data-controller="multiple-upload" data-multiple-upload-types-value="<%= ImageUploader::ALLOWED_TYPES.to_json %>" data-multiple-upload-server-value="<%= upload_server %>">
       <!-- will be replaced by Uppy -->
       <%= f.label :photos, "Select photos", class: "form-label" %>
       <%= f.file_field :photos,
         multiple: true,
         class: "form-control",
-        accept: ImageUploader::ALLOWED_TYPES.join(","),
-        data: {
-          upload_server: upload_server,
-        } %>
+        data: { multiple_upload_target: "input" } %>
     </div>
   <% end %>
 
