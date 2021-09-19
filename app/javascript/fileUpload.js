@@ -12,7 +12,7 @@ import {
   AwsS3Multipart,
 } from 'uppy'
 
-const randomstring = require('randomstring')
+import { nanoid } from 'nanoid'
 
 const singleFileUpload = (fileInput) => {
   const imagePreview = document.getElementById(fileInput.dataset.previewElement)
@@ -67,7 +67,7 @@ const multipleFileUpload = (fileInput) => {
     const hiddenField = document.createElement('input')
 
     hiddenField.type = 'hidden'
-    hiddenField.name = `album[photos_attributes][${randomstring.generate()}][image]`
+    hiddenField.name = `album[photos_attributes][${nanoid()}][image]`
     hiddenField.value = uploadedFileData(file, response, fileInput)
 
     document.querySelector('form').appendChild(hiddenField)
