@@ -127,7 +127,7 @@ GEM
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     public_suffix (4.0.6)
-    puma (5.4.0)
+    puma (5.6.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -227,7 +227,7 @@ DEPENDENCIES
   image_processing (~> 1.10)
   listen (~> 3.7)
   marcel
-  puma (~> 5.4)
+  puma (~> 5.6)
   rails (~> 6.1.4)
   selenium-webdriver
   shrine (~> 3.3)
