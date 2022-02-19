@@ -16,15 +16,16 @@
     <div class="mb-3">
       <%= f.label :cover_photo, class: "form-label" %>
 
+      <!-- for storing cover photo uploaded file data -->
+      <%= f.hidden_field :cover_photo,
+        value: @album.cached_cover_photo_data,
+        data: { single_upload_target: "result" },
+        id: nil %>
+
       <!-- will be replaced by Uppy -->
       <%= f.file_field :cover_photo,
         class: "form-control",
         data: { single_upload_target: "input" } %>
-
-      <!-- for storing cover photo uploaded file data -->
-      <%= f.hidden_field :cover_photo,
-        value: @album.cached_cover_photo_data,
-        data: { single_upload_target: "result" } %>
     </div>
 
     <div class="d-inline-block mt-1 mb-3">
