@@ -239,4 +239,4 @@ DEPENDENCIES
   webpacker (= 6.0.0.rc.5)
 
 BUNDLED WITH
-   2.2.18
+   2.3.7
