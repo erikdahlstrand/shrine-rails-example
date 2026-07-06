@@ -1,7 +1,7 @@
-import { Core, XHRUpload, AwsS3, AwsS3Multipart } from 'uppy'
+import { Uppy, XHRUpload, AwsS3 } from 'uppy'
 
 export function uppyInstance({ id, types, server }) {
-  const uppy = new Core({
+  const uppy = new Uppy({
     id: id,
     autoProceed: true,
     restrictions: {
@@ -10,12 +10,20 @@ export function uppyInstance({ id, types, server }) {
   })
 
   if (server == 's3') {
+    // The AwsS3 and AwsS3Multipart plugins were merged in Uppy 4, and the
+    // `companionUrl` option was renamed to `endpoint`. Uppy's built-in Companion
+    // client fetches the upload parameters from `<endpoint>/s3/params`, which is
+    // where Shrine's presign endpoint is mounted.
     uppy.use(AwsS3, {
-      companionUrl: '/', // will call Shrine's presign endpoint mounted on `/s3/params`
+      endpoint: '/',
+      shouldUseMultipart: false, // Shrine's presign endpoint only signs single-request uploads
     })
   } else if (server == 's3_multipart') {
-    uppy.use(AwsS3Multipart, {
-      companionUrl: '/' // will call uppy-s3_multipart endpoint mounted on `/s3/multipart`
+    // In multipart mode AwsS3 talks to `<endpoint>/s3/multipart`, which is where
+    // the uppy-s3_multipart endpoint is mounted.
+    uppy.use(AwsS3, {
+      endpoint: '/',
+      shouldUseMultipart: true,
     })
   } else {
     uppy.use(XHRUpload, {
@@ -27,12 +35,9 @@ export function uppyInstance({ id, types, server }) {
 }
 
 export function uploadedFileData(file, response, server) {
-  if (server == 's3') {
-    const id = file.meta['key'].match(/^cache\/(.+)/)[1]; // object key without prefix
-
-    return JSON.stringify(fileData(file, id))
-  } else if (server == 's3_multipart') {
-    const id = response.uploadURL.match(/\/cache\/([^\?]+)/)[1]; // object key without prefix
+  if (server == 's3' || server == 's3_multipart') {
+    // Uppy stores the presigned S3 object key on `file.s3Multipart.key`
+    const id = file.s3Multipart.key.match(/^cache\/(.+)/)[1] // object key without prefix
 
     return JSON.stringify(fileData(file, id))
   } else {

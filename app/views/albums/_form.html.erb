@@ -22,10 +22,10 @@
         data: { single_upload_target: "result" },
         id: nil %>
 
-      <!-- will be replaced by Uppy -->
+      <!-- native file input, enhanced by Uppy -->
       <%= f.file_field :cover_photo,
         class: "form-control",
-        data: { single_upload_target: "input" } %>
+        data: { single_upload_target: "input", action: "single-upload#upload" } %>
     </div>
 
     <div class="d-inline-block mt-1 mb-3">

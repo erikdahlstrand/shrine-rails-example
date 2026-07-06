@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus'
-import { FileInput, Informer, ProgressBar, ThumbnailGenerator } from 'uppy'
+import { StatusBar, ThumbnailGenerator } from 'uppy'
 import { uppyInstance, uploadedFileData } from '../uppy'
 
 export default class extends Controller {
@@ -7,13 +7,24 @@ export default class extends Controller {
   static values = { types: Array, server: String }
 
   connect() {
-    this.inputTarget.classList.add('d-none')
-
     this.uppy = this.createUppy()
   }
 
   disconnect() {
-    this.uppy.close()
+    this.uppy.destroy()
+  }
+
+  // Uppy 5 removed the FileInput plugin, so we keep the native file input
+  // (wired up via a Stimulus action) and hand its files to Uppy ourselves.
+  upload(event) {
+    Array.from(event.target.files).forEach((file) => {
+      try {
+        this.uppy.addFile(file)
+      } catch (error) {
+        if (!error.isRestriction) throw error // ignore `allowedFileTypes` rejections
+      }
+    })
+    event.target.value = null // allow selecting the same file again
   }
 
   createUppy() {
@@ -22,15 +33,9 @@ export default class extends Controller {
         types: this.typesValue,
         server: this.serverValue,
       })
-      .use(FileInput, {
-        target: this.inputTarget.parentNode,
-        locale: { strings: { chooseFiles: 'Choose file' } },
-      })
-      .use(Informer, {
-        target: this.inputTarget.parentNode,
-      })
-      .use(ProgressBar, {
+      .use(StatusBar, {
         target: this.previewTarget.parentNode,
+        hideUploadButton: true,
       })
       .use(ThumbnailGenerator, {
         thumbnailWidth: 600,

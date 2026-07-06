@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.uppy.close()
+    this.uppy.destroy()
   }
 
   createUppy() {
