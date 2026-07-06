@@ -25,6 +25,7 @@
       <!-- native file input, enhanced by Uppy -->
       <%= f.file_field :cover_photo,
         class: "form-control",
+        accept: ImageUploader::ALLOWED_TYPES.join(","),
         data: { single_upload_target: "input", action: "single-upload#upload" } %>
     </div>
 
@@ -44,6 +45,7 @@
       <%= f.file_field :photos,
         multiple: true,
         class: "form-control",
+        accept: ImageUploader::ALLOWED_TYPES.join(","),
         data: { multiple_upload_target: "input" } %>
     </div>
   <% end %>

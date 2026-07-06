@@ -1,6 +1,6 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 import { Dashboard } from 'uppy'
-import { uppyInstance, uploadedFileData } from '../uppy'
+import { uppyInstance, uploadedFileData } from 'uppy_helper'
 import { nanoid } from 'nanoid'
 
 export default class extends Controller {

@@ -149,7 +149,7 @@ end
 [Shrine]: https://github.com/shrinerb/shrine
 [setup CORS]: http://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html
 [Uppy]: https://uppy.io
-[application.js]: /app/javascript/packs/application.js
+[application.js]: /app/javascript/application.js
 [cached_attachment_data]: https://github.com/shrinerb/shrine/blob/master/doc/plugins/cached_attachment_data.md#readme
 [restore_cached_data]: https://github.com/shrinerb/shrine/blob/master/doc/plugins/restore_cached_data.md#readme
 [presign_endpoint]: https://github.com/shrinerb/shrine/blob/master/doc/plugins/presign_endpoint.md#readme

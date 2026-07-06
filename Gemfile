@@ -1,24 +1,27 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 6.1.4'
-gem 'sqlite3', '~> 1.4'
-gem 'puma', '~> 5.4'
-gem 'webpacker', '6.0.0.rc.5'
+ruby file: '.ruby-version'
 
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'rails', '~> 8.1.0'
+gem 'sqlite3', '>= 2.1'
+gem 'puma', '>= 6.0'
+
+# Asset pipeline (CSS/images) and JavaScript via import maps (no build step)
+gem 'propshaft'
+gem 'importmap-rails'
+
+gem 'bootsnap', require: false
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '~> 4.1'
-  gem 'listen', '~> 3.7'
+  gem 'web-console'
+  gem 'listen'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 3.35'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
 end
 
 gem 'shrine', '~> 3.3'
@@ -27,5 +30,3 @@ gem 'image_processing', '~> 1.10'
 gem 'uppy-s3_multipart', '~> 1.1'
 gem 'marcel'
 gem 'fastimage'
-
-gem 'sucker_punch'

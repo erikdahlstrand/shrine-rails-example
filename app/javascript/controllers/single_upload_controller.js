@@ -1,6 +1,6 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 import { StatusBar, ThumbnailGenerator } from 'uppy'
-import { uppyInstance, uploadedFileData } from '../uppy'
+import { uppyInstance, uploadedFileData } from 'uppy_helper'
 
 export default class extends Controller {
   static targets = [ 'input', 'result', 'preview' ]

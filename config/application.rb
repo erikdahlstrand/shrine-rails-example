@@ -12,7 +12,6 @@ require "action_mailer/railtie"
 # require "action_text/engine"
 require "action_view/railtie"
 # require "action_cable/engine"
-# require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -22,17 +21,19 @@ Bundler.require(*Rails.groups)
 module ShrineRailsExample
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 8.1
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # Use SuckerPunch for background jobs.
-    config.active_job.queue_adapter = :sucker_punch
+    # Run background jobs (Shrine promote/destroy) in-process with the built-in
+    # async adapter. Swap for a durable backend (e.g. Solid Queue) in production.
+    config.active_job.queue_adapter = :async
 
-    config.autoload_paths += %w[lib]
+    # Autoload and eager load the `lib` directory (e.g. lib/generate_thumbnail.rb).
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # supports :s3, :s3_multipart, or :app
     config.upload_server = if ENV["UPLOAD_SERVER"].present?
