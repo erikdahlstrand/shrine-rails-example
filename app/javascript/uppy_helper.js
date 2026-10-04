@@ -10,19 +10,18 @@ export function uppyInstance({ id, types, server }) {
   })
 
   if (server == 's3') {
-    // The AwsS3 and AwsS3Multipart plugins were merged in Uppy 4, and the
-    // `companionUrl` option was renamed to `endpoint`. Uppy's built-in Companion
-    // client fetches the upload parameters from `<endpoint>/s3/params`, which is
-    // where Shrine's presign endpoint is mounted.
+    // In Companion mode AwsS3 fetches the upload parameters from
+    // `<companionEndpoint>/s3/params`, which is where Shrine's presign endpoint
+    // is mounted. An empty string makes the requests relative to the current host.
     uppy.use(AwsS3, {
-      endpoint: '/',
+      companionEndpoint: '',
       shouldUseMultipart: false, // Shrine's presign endpoint only signs single-request uploads
     })
   } else if (server == 's3_multipart') {
-    // In multipart mode AwsS3 talks to `<endpoint>/s3/multipart`, which is where
-    // the uppy-s3_multipart endpoint is mounted.
+    // In multipart mode AwsS3 talks to `<companionEndpoint>/s3/multipart`, which
+    // is where the uppy-s3_multipart endpoint is mounted.
     uppy.use(AwsS3, {
-      endpoint: '/',
+      companionEndpoint: '',
       shouldUseMultipart: true,
     })
   } else {
@@ -36,8 +35,8 @@ export function uppyInstance({ id, types, server }) {
 
 export function uploadedFileData(file, response, server) {
   if (server == 's3' || server == 's3_multipart') {
-    // Uppy stores the presigned S3 object key on `file.s3Multipart.key`
-    const id = file.s3Multipart.key.match(/^cache\/(.+)/)[1] // object key without prefix
+    // Uppy 6 reports the S3 object key in the upload response
+    const id = response.body.key.match(/^cache\/(.+)/)[1] // object key without prefix
 
     return JSON.stringify(fileData(file, id))
   } else {
