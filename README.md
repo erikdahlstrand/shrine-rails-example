@@ -108,13 +108,14 @@ development.
     test).
 * `s3_multipart`
   * Shrine storages are set to S3.
-  * The Uppy [AwsS3Multipart] plugin is used to upload files directly to the S3
-    `cache` storage, using S3's multipart upload strategy. This allows files
-    larger than 5GB to be uploaded to S3, and can have other reliability and
-    performance advantages from uploading in multiple smaller requests,
-    especially for large files even if less than 5GB.
+  * The Uppy [AwsS3] plugin (with `shouldUseMultipart: true`) is used to upload
+    files directly to the S3 `cache` storage, using S3's multipart upload
+    strategy. This allows files larger than 5GB to be uploaded to S3, and can
+    have other reliability and performance advantages from uploading in
+    multiple smaller requests, especially for large files even if less than
+    5GB.
   * The [uppy-s3_multipart] gem, supporting the shrine `uppy_s3_multipart`
-    plugin, are used to provide endpoints for the AwsS3Multipart Uppy plugin.
+    plugin, are used to provide endpoints for the Uppy AwsS3 plugin.
   * This is never the default, but you can have the app use it by setting an
     ENV variable.
 
@@ -156,7 +157,6 @@ end
 [upload_endpoint]: https://github.com/shrinerb/shrine/blob/master/doc/plugins/upload_endpoint.md#readme
 [XHRUpload]: https://uppy.io/docs/xhr-upload/
 [AwsS3]: https://uppy.io/docs/aws-s3/
-[AwsS3Multipart]: https://uppy.io/docs/aws-s3-multipart/
 [uppy-s3_multipart]: https://github.com/janko/uppy-s3_multipart
 [Direct Uploads to S3]: https://shrinerb.com/rdoc/files/doc/direct_s3_md.html
 [Adding Direct App Uploads]: https://github.com/shrinerb/shrine/wiki/Adding-Direct-App-Uploads

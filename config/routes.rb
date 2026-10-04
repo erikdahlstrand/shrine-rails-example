@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     # signed url.
     mount Shrine.presign_endpoint(:cache) => "/s3/params"
   when :s3_multipart
-    # Still upload directly to S3, but using Uppy's AwsS3Multipart plugin
+    # Still upload directly to S3, but using S3's multipart upload strategy
     mount Shrine.uppy_s3_multipart(:cache) => "/s3/multipart"
   when :app
     # In development and test environment by default we're using filesystem storage
